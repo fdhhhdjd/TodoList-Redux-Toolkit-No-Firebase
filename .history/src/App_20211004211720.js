@@ -10,10 +10,10 @@ function App() {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
               <TodoList />
             </Route>
-            <Route exact path="/:id">
+            <Route exact path="/home/:id">
               <View />
             </Route>
           </Switch>

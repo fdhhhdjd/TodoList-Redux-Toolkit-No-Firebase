@@ -2,22 +2,12 @@ import { v4 as uuidv4 } from "uuid";
 import { nanoid } from "nanoid";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
-  todos: [
-    {
-      id: 1,
-      task: "tai la sieu nhan",
-      completed: false,
-    },
-  ],
-  todoItem: [],
+  todos: [],
 };
 const movieSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    getTodo: (state, action) => {
-      state.todoItem = state.todos.find((el) => el.id == action.payload);
-    },
     addTodo: (state, action) => {
       const newTodo = {
         id: nanoid(),
@@ -49,11 +39,22 @@ const movieSlice = createSlice({
         todos: update,
       };
     },
-  },
+
+    ViewTodo: (state, action) => {
+      const viewTodo = state.todos.find((item) => item.id === action.payload);
+      return {
+        ...state,
+        todos: viewTodo,
+      };
+    },
+  //   clearStudent: (state) => {
+  //     state.todos = [];
+  //   },
+  // },
   extraReducers: {},
 });
 const todoReducer = movieSlice.reducer;
-export const { addTodo, removeTodo, editTodo, getTodo } = movieSlice.actions;
+export const { addTodo, removeTodo, editTodo, ViewTodo, clearStudent } =
+  movieSlice.actions;
 export const getAllTodo = (state) => state.todos.todos;
-export const getShowTodo = (state) => state.todos.todoItem;
 export default todoReducer;

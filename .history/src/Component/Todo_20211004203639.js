@@ -3,13 +3,12 @@ import "./Todo.css";
 import { cssTransition, toast } from "react-toastify";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTodo } from "../Redux/TodoSilce";
-import { Link, useRouteMatch } from "react-router-dom";
-export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
+import { removeTodo, ViewTodo } from "../Redux/TodoSilce";
+import { Link } from "react-router-dom";
+export const Todo = ({ todo,id, task, completed, toggleTodo, updateTodo }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editStack, setEditStack] = useState(task);
-  const { path } = useRouteMatch();
   const handleUpload = (e) => {
     e.preventDefault();
     if (editStack === task) {
@@ -24,6 +23,9 @@ export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
     if (window.confirm("Bạn thực sự muốn xóa 🤔")) {
       dispatch(removeTodo({ id }), toast.success("bạn đã xóa thành công 😒"));
     }
+  };
+  const ClickItem = () => {
+    dispatch(ViewTodo(todo);
   };
   return (
     <>
@@ -56,8 +58,8 @@ export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
           <button onClick={removeItem}>
             <i className="fas fa-trash" />
           </button>
-          <Link exact to={`${path}${id}`}>
-            <i class="fas fa-eye"></i>
+          <Link to={`/home/${id}`}>
+            <i onClick={ClickItem} className="fas fa-eye"></i>
           </Link>
         </div>
       </TransitionGroup>

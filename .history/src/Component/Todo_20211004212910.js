@@ -56,7 +56,7 @@ export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
           <button onClick={removeItem}>
             <i className="fas fa-trash" />
           </button>
-          <Link exact to={`${path}${id}`}>
+          <Link exact to={`${path}/${id}`}>
             <i class="fas fa-eye"></i>
           </Link>
         </div>

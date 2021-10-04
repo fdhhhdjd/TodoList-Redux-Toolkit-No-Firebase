@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Todo.css";
 import { cssTransition, toast } from "react-toastify";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTodo } from "../Redux/TodoSilce";
-import { Link, useRouteMatch } from "react-router-dom";
+import { clearStudent, removeTodo, ViewTodo } from "../Redux/TodoSilce";
+import { useParams } from "react-router";
 export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editStack, setEditStack] = useState(task);
-  const { path } = useRouteMatch();
+  const param = useParams();
   const handleUpload = (e) => {
     e.preventDefault();
     if (editStack === task) {
@@ -25,6 +25,12 @@ export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
       dispatch(removeTodo({ id }), toast.success("bạn đã xóa thành công 😒"));
     }
   };
+  useEffect(() => {
+    dispatch(ViewTodo(pram.id));
+    return () => {
+      dispatch(clearStudent());
+    };
+  }, []);
   return (
     <>
       <TransitionGroup className={completed ? "Todo completed" : "Todo"}>
@@ -56,9 +62,9 @@ export const Todo = ({ id, task, completed, toggleTodo, updateTodo }) => {
           <button onClick={removeItem}>
             <i className="fas fa-trash" />
           </button>
-          <Link exact to={`${path}${id}`}>
-            <i class="fas fa-eye"></i>
-          </Link>
+          <button>
+            <i className="fas fa-eye"></i>
+          </button>
         </div>
       </TransitionGroup>
     </>

@@ -5,19 +5,15 @@ const initialState = {
   todos: [
     {
       id: 1,
-      task: "tai la sieu nhan",
+      task: "taiheo",
       completed: false,
     },
   ],
-  todoItem: [],
 };
 const movieSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    getTodo: (state, action) => {
-      state.todoItem = state.todos.find((el) => el.id == action.payload);
-    },
     addTodo: (state, action) => {
       const newTodo = {
         id: nanoid(),
@@ -49,11 +45,27 @@ const movieSlice = createSlice({
         todos: update,
       };
     },
+
+    editTodo: (state, action) => {
+      const update = state.todos.map((todo) => {
+        if (todo.id === action.payload.id) {
+          return { ...todo };
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        todos: update,
+      };
+    },
+    // clearStudent: (state) => {
+    //   state.todos = [];
+    // },
   },
   extraReducers: {},
 });
 const todoReducer = movieSlice.reducer;
-export const { addTodo, removeTodo, editTodo, getTodo } = movieSlice.actions;
+export const { addTodo, removeTodo, editTodo, ViewTodo, clearStudent } =
+  movieSlice.actions;
 export const getAllTodo = (state) => state.todos.todos;
-export const getShowTodo = (state) => state.todos.todoItem;
 export default todoReducer;
