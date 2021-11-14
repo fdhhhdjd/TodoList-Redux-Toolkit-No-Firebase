@@ -16,6 +16,7 @@
     "react-toastify": "^8.0.3",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",
+    "redux-logger": "^3.0.6",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },

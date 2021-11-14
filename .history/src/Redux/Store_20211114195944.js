@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+
 import TodoReducer from "./TodoSilce";
 const store = configureStore({
   reducer: {
